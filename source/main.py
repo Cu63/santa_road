@@ -29,6 +29,7 @@ def get_data():
         data = json.load(f)
     return data['gifts'], data['snowAreas'], data['children'] 
 
+
 def main():
     gifts, snowAreas, children = get_data()
     print('gifts:', gifts)

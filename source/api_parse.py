@@ -4,16 +4,20 @@ import json
 
 def send_answer(cords: list, bags: list):
     map_id = 'faf7ef78-41b3-4a36-8423-688a61929c08'
-    cords = [[(1, 2), (1, 3), (1, 4)]]
+    cords = [[(1, 2), (1, 3)], [(1, 4)]]
+    bags = [(1,), (2,3,4)]
     moves = []
-    ans ={'moves': moves}
+    stack_of_bags = bags    
+    ans ={'mapID': map_id, 'moves': moves, 'stackOfBags': stack_of_bags}
     for way in cords:
         for point in way:
             moves.append({"x": point[0], "y": point[1]})
         moves.append({"x": 0, "y": 0})
+
+    stack_of_bags = stack_of_bags[::-1]
+    print(stack_of_bags)
     ans = json.dumps(ans)
     print(ans)
-
 
 
 def get_map():
