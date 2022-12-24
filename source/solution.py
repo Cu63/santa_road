@@ -18,7 +18,6 @@ def bag_packing(gifts: list) -> list[list]:
             bag_weight += d['weight']
             bag_volume += d['volume']
             bag.append(d['id'])
-
     res.append(bag)
     return res
 
