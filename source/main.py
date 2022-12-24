@@ -1,6 +1,7 @@
-import json
-from api_parse import send_answer
 from PIL import Image, ImageDraw
+from api_parse import send_answer
+from solution import create_routes, bag_packing
+import json
 
 
 def draw_map(children, snow_a):
@@ -20,7 +21,25 @@ def draw_map(children, snow_a):
         print(c)
 
     img.show()
-    img.save('1.png')
+    img.save('../maps/map.png')
+
+
+def draw_routes(routes):
+    img = Image.open('../maps/map.png')
+    draw = ImageDraw.Draw(img)
+    for route in routes:
+        start_x = 0
+        start_y = 0
+        for point in route:
+            print()
+            x = point[0]
+            y = point[1]
+            draw.line((start_x, start_y, x, y), fill='red', width=5)
+            start_x = x
+            start_y = y
+        draw.line((start_x, start_y, 0, 0), fill='red', width=5)
+    img.show()
+    img.save('../maps/routes.png')
 
 
 def get_data():
@@ -35,8 +54,11 @@ def main():
     print('gifts:', gifts)
     print('children:', children)
     print('snowAreas:', snowAreas)
-    draw_map(children, snowAreas)
-    send_answer()
+    # draw_map(children, snowAreas)
+    draw_routes([[(c['x'], c['y']) for c in children]])
+    bags = bag_packing()
+    routes = create_routes(children, bags)
+    send_answer(routes, bags)
 
 
 if __name__ == '__main__':
