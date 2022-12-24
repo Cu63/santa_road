@@ -1,12 +1,6 @@
 import json
 
 
-def get_data():
-    with open('../maps/map.json') as f:
-        data = json.load(f)
-    return data['gifts']
-
-
 def bag_packing(gifts: list) -> list[list]:
     res = list()
     bag = list()
@@ -39,6 +33,10 @@ def create_routes(cords: list, bags: list):
             route.append((p['x'], p['y']))
         routes.append(route)
     return routes
+
+
+def euclidean_distance(p, q):
+    return ((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2) ** 1/2
 
 
 def _main():
