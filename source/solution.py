@@ -19,6 +19,9 @@ def bag_packing(gifts: list) -> list[list]:
             bag_volume += d['volume']
             bag.append(d['id'])
     res.append(bag)
+    res = sorted(res, key=lambda x: len(x), reverse=True)
+    for c in res:
+        print(len(c))
     return res
 
 
