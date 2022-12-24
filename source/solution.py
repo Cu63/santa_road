@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 import json
+
 
 def get_data():
     with open('../maps/map.json') as f:
@@ -28,11 +28,6 @@ def bag_packing(gifts: list) -> list[list]:
     res.append(bag)
     return res
 
-print(bag_packing(get_data()))
-=======
-def bag_packing():
-    pass
-
 
 def create_routes(cords: list, bags: list):
     routes = []
@@ -55,4 +50,3 @@ def _main():
 
 if __name__ == '__main__':
     _main()
->>>>>>> 62913d55d73445fc6885856c02ca789e7d9a8cfd
