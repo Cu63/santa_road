@@ -49,7 +49,4 @@ def _main():
 
 if __name__ == '__main__':
     _main()
-<<<<<<< HEAD
-'''
-=======
->>>>>>> 7a59ff7d7910b3224e9c822ae4b74a9e780d6ad9
+
