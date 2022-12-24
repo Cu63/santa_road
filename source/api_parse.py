@@ -1,5 +1,5 @@
-import requests
 import json
+import requests
 
 
 def send_answer(cords: list, bags: list):
@@ -33,7 +33,8 @@ def get_map():
 
 def _main():
     # map_ = get_map()
-    send_answer([], [])
+    bags = bag_packing()
+    send_answer(routes, [])
 
 
 if __name__ == '__main__':
