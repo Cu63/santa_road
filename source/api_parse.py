@@ -9,17 +9,19 @@ def send_answer(cords: list, bags: list):
     url = 'https://datsanta.dats.team/api/round'
     map_id = 'faf7ef78-41b3-4a36-8423-688a61929c08'
     moves = []
-    ans ={'mapID': map_id, 'moves': moves, 'stackOfBags': bags}
     for way in cords:
         for point in way:
-            moves.append({"x": point[0], "y": point[1]})
-        moves.append({"x": 0, "y": 0})
+            moves.append(point)
 
     bags = bags[::-1]
-    print(ans)
     ans ={'mapID': map_id, 'moves': moves, 'stackOfBags': bags}
+    print(ans)
     r = requests.post(url, json=ans, headers=headers)
     print(r.text)
+    r = json.loads(r.text)
+    with open('solution_id.txt', 'a') as f:
+        f.write(r['roundID'])
+
 
 
 def get_map():
@@ -39,6 +41,7 @@ def get_result():
             }
     with open('solution_id.txt') as f:
         id_ = f.readlines()
+    print(id_[-1][:-1])
     url = f'https://datsanta.dats.team/api/round/{id_[-1][:-1]}'
     ans = requests.get(url, headers=headers)
     print(ans.text)

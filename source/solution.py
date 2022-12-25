@@ -19,7 +19,7 @@ def bag_packing(gifts: list) -> list[list]:
             bag_volume += d['volume']
             bag.append(d['id'])
     res.append(bag)
-    res = sorted(res, key=lambda x: len(x), reverse=True)
+    res = sorted(res, key=lambda x: len(x))
     return res
 
 
@@ -27,6 +27,7 @@ def make_cords(cords, routes):
     cord_routes = []
     for route in routes:
         cord_route = [cords[i] for i in route]
+        cord_route.append({"x": 0, "y": 0})
         cord_routes.append(cord_route)
     return cord_routes
 

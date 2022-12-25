@@ -57,10 +57,10 @@ def main():
     # draw_map(children, snowAreas)
     bags = bag_packing(gifts)
     routes = create_routes(children, bags)
-    print(routes)
+    # print(routes)
     # draw_routes([[(c['x'], c['y']) for c in children]])
-    draw_routes(routes)
-    # send_answer(routes, bags)
+    # draw_routes(routes)
+    send_answer(routes, bags)
 
 
 if __name__ == '__main__':
