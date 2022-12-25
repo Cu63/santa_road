@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw
 from api_parse import send_answer
-from solution import create_routes, bag_packing
+from solution import create_routes, bag_packing, make_graph
 import json
 
 
@@ -31,9 +31,8 @@ def draw_routes(routes):
         start_x = 0
         start_y = 0
         for point in route:
-            print()
-            x = point[0]
-            y = point[1]
+            x = point['x']
+            y = point['y']
             draw.line((start_x, start_y, x, y), fill='red', width=5)
             start_x = x
             start_y = y
@@ -54,12 +53,14 @@ def main():
     print('gifts:', gifts)
     print('children:', children)
     print('snowAreas:', snowAreas)
+    # make_graph(children)
     # draw_map(children, snowAreas)
     bags = bag_packing(gifts)
     routes = create_routes(children, bags)
+    print(routes)
     # draw_routes([[(c['x'], c['y']) for c in children]])
-    # draw_routes(routes)
-    send_answer(routes, bags)
+    draw_routes(routes)
+    # send_answer(routes, bags)
 
 
 if __name__ == '__main__':
