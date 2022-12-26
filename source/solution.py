@@ -73,9 +73,11 @@ def make_graph(cords: list):
             y_2 = cords[j]['y']
             row.append(euclidean_distance((x_1, y_1), (x_2, y_2)))
         graph.append(row)
+    '''
     with open('graph', 'w') as f:
         for r in graph:
             print(*r, file=f)
+    '''
     return graph
 
 
