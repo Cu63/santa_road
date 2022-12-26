@@ -60,17 +60,17 @@ def create_answer(children, gifts):
     gifts_ = copy.deepcopy(gifts)
     presentingGifts = []
     pairs = [
-            (0, 1, 'sweets', 'sweets'),
-            (1, 2, 'sweets', 'sweets'),
-            (2, 3, 'sweets', 'sweets'),
-            (3, 4, 'sweets', 'sweets'),
-            (4, 5, 'books', 'books'),
-            (5, 6, 'books', 'books'),
-            (6, 7, 'books', 'books'),
-            (7, 8, 'books', 'books'),
-            (8, 9, 'pet', 'pet'),
-            (9, 10, 'pet', 'pet'),
-            (10, 11, 'pet', 'pet'),
+            (0, 1, 'sweets', 'sweets'), # 0
+            (1, 2, 'sweets', 'sweets'), # 1
+            (2, 3, 'sweets', 'sweets'), # 2
+            (3, 4, 'sweets', 'sweets'), # 3
+            (4, 5, 'books', 'books'),   # 4
+            (5, 6, 'books', 'books'),   # 5
+            (6, 7, 'books', 'books'),   # 6
+            (7, 8, 'books', 'books'),   # 7
+            (8, 9, 'pet', 'pet'),       # 8
+            (9, 10, 'pet', 'pet'),      # 9
+            (10, 11, 'pet', 'pet'),     # 10
     ]
     for p in pairs:
         group_gifts, price = give_presents(*p, children_, gifts_)
@@ -79,6 +79,7 @@ def create_answer(children, gifts):
 
     print(presentingGifts)
     print(total_price)
+    assert total_price < 100000
     return presentingGifts
 
 
