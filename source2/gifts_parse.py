@@ -59,6 +59,11 @@ def create_answer(children, gifts):
     children_ = copy.deepcopy(children)
     gifts_ = copy.deepcopy(gifts)
     presentingGifts = []
+    types = [
+    'constructors', 'dolls', 'radio_contolled_toys', 'toy_vehicles',
+    'board_games', 'playground', 'soft_toys', 'computer_games', 'sweets',
+    'books', 'pet', 'clothes'
+    ]
     pairs = [
             (0, 1, 'sweets', 'sweets'), # 0
             (1, 2, 'sweets', 'sweets'), # 1
@@ -69,9 +74,10 @@ def create_answer(children, gifts):
             (6, 7, 'books', 'books'),   # 6
             (7, 8, 'books', 'books'),   # 7
             (8, 9, 'pet', 'pet'),       # 8
-            (9, 10, 'pet', 'pet'),      # 9
+            (9, 10, 'radio_controlled_toys', 'pet'),      # 9
             (10, 11, 'pet', 'pet'),     # 10
     ]
+    # for i in range(len(pairs)):
     for p in pairs:
         group_gifts, price = give_presents(*p, children_, gifts_)
         total_price += price
@@ -88,7 +94,7 @@ def main():
     children = get_children_stats(children)
     gifts = get_gifts_stats(gifts)
     presentingGifts = create_answer(children, gifts)
-    # send_answer(presentingGifts)
+    send_answer(presentingGifts)
     # get_result()
 
 

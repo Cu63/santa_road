@@ -3,10 +3,6 @@ import copy
 import json
 
 
-def get_dict():
-    with open('../maps/gifts.json') as f:
-        data = json.load(f)
-    return data['children'], data['gifts']
 
 
 def get_gifts_stats(gifts):
@@ -27,7 +23,7 @@ def get_children_stats(children):
     for child in children:
         if child['age'] not in stat:
             stat[child['age']] = {'male': [], 'female': []}
-        stat[child['age']][child['gender']].append(child['id'])
+        stat[child['age']][child['gender']].append((child['x'], child['y']))
     for s in sorted(stat):
         print(f'{s}: {stat[s]}')
     return stat
@@ -53,29 +49,25 @@ def give_presents(start, end, cat_male, cat_female, children_, gifts_):
     return presentingGifts, total_price
 
 
-
 def create_answer(children, gifts):
+    l = ['educational_games', 'music_games', 'bath_toys',
+         'bike', 'paints', 'casket', 'soccer_ball', 'toy_kitchen']
     total_price = 0
     children_ = copy.deepcopy(children)
     gifts_ = copy.deepcopy(gifts)
     presentingGifts = []
-    types = [
-    'constructors', 'dolls', 'radio_contolled_toys', 'toy_vehicles',
-    'board_games', 'playground', 'soft_toys', 'computer_games', 'sweets',
-    'books', 'pet', 'clothes'
-    ]
     pairs = [
-            (0, 1, 'sweets', 'sweets'), # 0
-            (1, 2, 'sweets', 'sweets'), # 1
-            (2, 3, 'sweets', 'sweets'), # 2
-            (3, 4, 'sweets', 'sweets'), # 3
-            (4, 5, 'books', 'books'),   # 4
-            (5, 6, 'books', 'books'),   # 5
-            (6, 7, 'books', 'books'),   # 6
-            (7, 8, 'books', 'books'),   # 7
-            (8, 9, 'pet', 'pet'),       # 8
-            (9, 10, 'radio_controlled_toys', 'pet'),      # 9
-            (10, 11, 'pet', 'pet'),     # 10
+            (0, 1, 'music_games', 'music_games'), # 0
+            (1, 2, 'music_games', 'music_games'), # 1
+            (2, 3, 'educational_games', 'educational_games'), # 2
+            (3, 4, 'educational_games', 'educational_games'), # 3
+            (4, 5, 'paints', 'paints'),   # 4
+            (5, 6, 'casket', 'casket'),   # 5
+            (6, 7, 'soccer_ball', 'toy_kitchen'),   # 6
+            (7, 8, 'soccer_ball', 'toy_kitchen'),   # 7
+            (8, 9, 'soccer_ball', 'toy_kitchen'),       # 8
+            (9, 10, 'educational_games', 'educational_games'),      # 9
+            (10, 11, 'bike', 'bike'),     # 10
     ]
     # for i in range(len(pairs)):
     for p in pairs:
@@ -85,7 +77,7 @@ def create_answer(children, gifts):
 
     print(presentingGifts)
     print(total_price)
-    assert total_price < 100000
+    assert total_price < 50000
     return presentingGifts
 
 

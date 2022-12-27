@@ -8,20 +8,19 @@ def get_data():
 
 
 
-def send_answer(gifts: list):
+def send_answer(moves, gifts):
     headers = {
             'X-API-Key': '6701fb9f-7149-43e5-aff4-19d0a8a2641f',
             }
-    url = 'https://datsanta.dats.team/api/round3'
+    url = 'https://datsanta.dats.team/api/round'
     map_id = 'dd6ed651-8ed6-4aeb-bcbc-d8a51c8383cc'
-    ans ={'mapID': map_id, 'presentingGifts': gifts}
+    ans ={'mapID': map_id, 'moves': moves, 'stackOfBags': gifts}
     print(ans)
     r = requests.post(url, json=ans, headers=headers)
     print(r.text)
     r = json.loads(r.text)
     with open('solution_id.txt', 'a') as f:
         f.write(r['roundId'])
-
 
 
 def get_map():

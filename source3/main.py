@@ -2,6 +2,9 @@ from PIL import Image, ImageDraw
 from api_parse import send_answer, get_data
 from solution import create_routes, bag_packing, make_graph
 import json
+from gifts_parse import (get_gifts_stats, get_children_stats, 
+                        give_presents, create_answer)
+
 
 
 def draw_map(children, snow_a):
@@ -27,16 +30,15 @@ def draw_map(children, snow_a):
 def draw_routes(routes):
     img = Image.open('../maps/map.png')
     draw = ImageDraw.Draw(img)
-    for route in routes:
-        start_x = 0
-        start_y = 0
-        for point in route:
-            x = point['x']
-            y = point['y']
-            draw.line((start_x, start_y, x, y), fill='red', width=5)
-            start_x = x
-            start_y = y
-        draw.line((start_x, start_y, 0, 0), fill='red', width=5)
+    start_x = 0
+    start_y = 0
+    for point in routes:
+        print(point)
+        x = point['x']
+        y = point['y']
+        draw.line((start_x, start_y, x, y), fill='red', width=5)
+        start_x = x
+        start_y = y
     img.show()
     img.save('../maps/routes.png')
 
@@ -45,15 +47,13 @@ def main():
     children, gifts, snowAreas = get_data()
     make_graph(children)
     # draw_map(children, snowAreas)
-    bags = bag_packing(gifts)
-    print(bags)
-    '''
-    routes = create_routes(children, bags)
-    # print(routes)
-    draw_routes([[(c['x'], c['y']) for c in children]])
+    gifts_s = get_gifts_stats(gifts)
+    children_s = get_children_stats(children)
+    presentingGifts = create_answer(children_s, gifts_s)
+    # bags = bag_packing(gifts)
+    routes, stackOfBags = create_routes(children, presentingGifts, gifts)
     draw_routes(routes)
-    # send_answer(routes, bags)
-    '''
+    send_answer(routes, stackOfBags)
 
 
 if __name__ == '__main__':
