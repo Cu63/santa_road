@@ -87,7 +87,7 @@ def main():
     gifts = get_gifts_stats(gifts)
     presentingGifts = create_answer(children, gifts)
     send_answer(presentingGifts)
-    # get_result()
+    get_result()
 
 
 if __name__ == '__main__':

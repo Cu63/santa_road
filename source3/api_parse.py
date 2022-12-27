@@ -20,7 +20,7 @@ def send_answer(moves, gifts):
     print(r.text)
     r = json.loads(r.text)
     with open('solution_id.txt', 'a') as f:
-        f.write(r['roundId'])
+        f.write(r['roundId'] + '\n')
 
 
 def get_map():
@@ -41,14 +41,13 @@ def get_result():
     with open('solution_id.txt') as f:
         id_ = f.readlines()
     print(id_[-1][:-1])
-    url = f'https://datsanta.dats.team/api/round2/{id_[-1][:-1]}'
+    url = f'https://datsanta.dats.team/api/round/{id_[-1][:-1]}'
     ans = requests.get(url, headers=headers)
     print(ans.text)
 
 
 def _main():
-    # map_ = get_map()
-    pass
+    get_result()
 
 
 if __name__ == '__main__':

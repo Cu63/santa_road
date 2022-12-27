@@ -1,37 +1,6 @@
 import json
 
 
-def bag_packing(gifts: list) -> list[list]:
-    res = list()
-    bag = list()
-    bag_weight = 0
-    bag_volume = 0
-    for d in gifts:
-        if bag_weight + d['weight'] > 200 or bag_volume + d['volume'] > 100:
-            res.append(bag.copy())
-            print(bag_weight, bag_volume)
-            bag.clear()
-            bag_weight = d['weight']
-            bag_volume = d['volume']
-            bag.append(d['id'])
-        else:
-            bag_weight += d['weight']
-            bag_volume += d['volume']
-            bag.append(d['id'])
-    res.append(bag)
-    res = sorted(res, key=lambda x: len(x))
-    return res
-
-
-def make_cords(cords, routes):
-    cord_routes = []
-    for route in routes:
-        cord_route = [cords[i] for i in route]
-        cord_route.append({"x": 0, "y": 0})
-        cord_routes.append(cord_route)
-    return cord_routes
-
-
 def get_present_id(cord, gifts):
     for g in gifts:
         if g['childID'] == cord:
@@ -59,10 +28,10 @@ def create_routes(cords: list, bags: list, gifts):
     bag = []
     route = []
     cur = 0
+    sum = 0
     while len(visited) < 1000:
         best = -1
         for i in range(1, len(graph)):
-            print(i, cur, best)
             if i in visited or i == cur:
                 continue
             if best == -1 or graph[cur][best] > graph[cur][i]:
@@ -71,8 +40,9 @@ def create_routes(cords: list, bags: list, gifts):
         cord = (cords[best]['x'], cords[best]['y'])
         giftID = get_present_id(cord, bags)
         present_w, present_v = get_w_v(giftID, gifts)
-        if w + present_w > 200 or v + present_v > 100:
+        if w + present_w >= 200 or v + present_v >= 100:
             presents.append(bag.copy()[::-1])
+            sum += len(bag)
             bag.clear()
             route.append({'x': 0,'y': 0})
             w = 0
@@ -85,10 +55,10 @@ def create_routes(cords: list, bags: list, gifts):
             route.append({'x': cord[0],'y': cord[1]})
             visited.add(best)
 
-    route.append({'x': cord[0],'y': cord[1]})
     presents.append(bag[::-1])
-    print(route)
-    print(presents)
+    presents = presents[::-1]
+    sum += len(bag)
+    print(sum)
     return route, presents
 
 

@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw
 from api_parse import send_answer, get_data
-from solution import create_routes, bag_packing, make_graph
+from solution import create_routes, make_graph
 import json
 from gifts_parse import (get_gifts_stats, get_children_stats, 
                         give_presents, create_answer)
@@ -16,12 +16,10 @@ def draw_map(children, snow_a):
         y = s['y']
         r = s['r']
         draw.ellipse((x-r, y-r, x+r, y+r), fill='blue')
-        print(s)
     for c in children:
         x = c['x']
         y = c['y']
         draw.rectangle((x-20, y-20, x+20, y+20), fill='green')
-        print(c)
 
     img.show()
     img.save('../maps/map.png')
@@ -33,7 +31,6 @@ def draw_routes(routes):
     start_x = 0
     start_y = 0
     for point in routes:
-        print(point)
         x = point['x']
         y = point['y']
         draw.line((start_x, start_y, x, y), fill='red', width=5)
